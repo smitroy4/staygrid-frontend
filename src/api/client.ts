@@ -1,7 +1,7 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios'
 import type { ApiResponse } from '../types'
 
-const API_BASE = import.meta.env.VITE_API_URL || 'https://staygrid-b02y.onrender.com/api/v1'
+const API_BASE = import.meta.env.VITE_API_URL || 'https://staygrid-b02y.onrender.com/api/v1/'
 
 const client = axios.create({
   baseURL: API_BASE,
@@ -77,12 +77,15 @@ client.interceptors.response.use(
   }
 )
 
-export const unwrap = <T>(response: { data: ApiResponse<T> }): T => {
-  const { data, error } = response.data
-  if (error) {
-    throw new Error(error.message)
+export const unwrap = <T>(response: { data: ApiResponse<T> | T }): T => {
+  const body = response.data as any
+  if (body && typeof body === 'object' && 'timeStamp' in body && ('data' in body || 'error' in body)) {
+    if (body.error) {
+      throw new Error(body.error.message)
+    }
+    return body.data as T
   }
-  return data as T
+  return body as T
 }
 
 export default client
