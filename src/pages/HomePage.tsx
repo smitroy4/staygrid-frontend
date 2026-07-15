@@ -8,9 +8,9 @@ const destinations = [
   { city: 'Manali', state: 'Himachal Pradesh', img: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800&q=80' },
   { city: 'Goa', state: 'Goa', img: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&q=80' },
   { city: 'Jaipur', state: 'Rajasthan', img: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800&q=80' },
-  { city: 'Varanasi', state: 'Uttar Pradesh', img: 'https://images.unsplash.com/photo-1566837945700-30057527ade0?w=800&q=80' },
+  { city: 'Varanasi', state: 'Uttar Pradesh', img: 'https://images.pexels.com/photos/16745037/pexels-photo-16745037.jpeg?auto=compress&cs=tinysrgb&w=800' },
   { city: 'Kerala', state: 'Kerala', img: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=800&q=80' },
-  { city: 'Udaipur', state: 'Rajasthan', img: 'https://images.unsplash.com/photo-1590071078367-c3f11e78c5b7?w=800&q=80' },
+  { city: 'Udaipur', state: 'Rajasthan', img: 'https://images.pexels.com/photos/31866953/pexels-photo-31866953.jpeg?auto=compress&cs=tinysrgb&w=800' },
 ]
 
 function getDefaultDates() {
