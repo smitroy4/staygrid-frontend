@@ -23,6 +23,14 @@ import AdminRoomForm from './pages/admin/AdminRoomForm'
 import AdminInventory from './pages/admin/AdminInventory'
 import AdminBookings from './pages/admin/AdminBookings'
 import AdminReports from './pages/admin/AdminReports'
+import AboutUs from './pages/info/AboutUs'
+import Contact from './pages/info/Contact'
+import Careers from './pages/info/Careers'
+import Press from './pages/info/Press'
+import HelpCenter from './pages/info/HelpCenter'
+import Cancellation from './pages/info/Cancellation'
+import TermsOfService from './pages/info/TermsOfService'
+import PrivacyPolicy from './pages/info/PrivacyPolicy'
 
 export default function App() {
   return (
@@ -45,6 +53,14 @@ export default function App() {
             <Route path="/hotels/:hotelId" element={<HotelDetailPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/press" element={<Press />} />
+            <Route path="/help" element={<HelpCenter />} />
+            <Route path="/cancellation" element={<Cancellation />} />
+            <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
 
             <Route
               path="/profile"
