@@ -34,7 +34,7 @@ export default function AboutUs() {
             <h2 className="text-3xl font-bold mb-6">Our Story</h2>
             <div className="space-y-4 text-surface-300 leading-relaxed">
               <p>
-                Founded in 2020 in Kolkata, StayGrid was born from a simple idea — make booking hotels in India
+                Founded in 2026 in Kolkata, StayGrid was born from a simple idea — make booking hotels in India
                 seamless, trustworthy, and affordable. What started as a small team of travel enthusiasts has
                 grown into one of India's fastest-growing hospitality platforms.
               </p>

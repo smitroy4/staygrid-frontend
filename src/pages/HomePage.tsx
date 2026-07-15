@@ -1,13 +1,25 @@
 import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Search, MapPin, Calendar, Users, Building2, Sparkles, Shield, HeadphonesIcon, ArrowRight } from 'lucide-react'
+import { Search, MapPin, Calendar, Users, Building2, Sparkles, Shield, HeadphonesIcon } from 'lucide-react'
 
 const HERO_IMG = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600&q=80'
-const FEATURED_IMGS = [
-  'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80',
-  'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80',
-  'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80',
+
+const destinations = [
+  { city: 'Manali', state: 'Himachal Pradesh', img: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800&q=80' },
+  { city: 'Goa', state: 'Goa', img: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&q=80' },
+  { city: 'Jaipur', state: 'Rajasthan', img: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800&q=80' },
+  { city: 'Varanasi', state: 'Uttar Pradesh', img: 'https://images.unsplash.com/photo-1566837945700-30057527ade0?w=800&q=80' },
+  { city: 'Kerala', state: 'Kerala', img: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=800&q=80' },
+  { city: 'Udaipur', state: 'Rajasthan', img: 'https://images.unsplash.com/photo-1590071078367-c3f11e78c5b7?w=800&q=80' },
 ]
+
+function getDefaultDates() {
+  const today = new Date()
+  const nextWeek = new Date(today)
+  nextWeek.setDate(nextWeek.getDate() + 7)
+  const fmt = (d: Date) => d.toISOString().split('T')[0]
+  return { start: fmt(today), end: fmt(nextWeek) }
+}
 
 export default function HomePage() {
   const navigate = useNavigate()
@@ -23,6 +35,16 @@ export default function HomePage() {
     if (startDate) params.set('startDate', startDate)
     if (endDate) params.set('endDate', endDate)
     params.set('roomsCount', String(roomsCount))
+    navigate(`/search?${params.toString()}`)
+  }
+
+  const handleDestinationClick = (destCity: string) => {
+    const { start, end } = getDefaultDates()
+    const params = new URLSearchParams()
+    params.set('city', destCity)
+    params.set('startDate', start)
+    params.set('endDate', end)
+    params.set('roomsCount', '1')
     navigate(`/search?${params.toString()}`)
   }
 
@@ -42,7 +64,7 @@ export default function HomePage() {
             <span className="text-brand-500"> Stay</span>
           </h1>
           <p className="text-surface-300 text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-            Discover extraordinary hotels and experiences worldwide
+            Discover extraordinary hotels and experiences across India
           </p>
 
           <form onSubmit={handleSearch} className="bg-surface-800/90 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-surface-700 shadow-2xl">
@@ -116,38 +138,27 @@ export default function HomePage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h2 className="text-3xl font-bold">Featured Destinations</h2>
-            <p className="text-surface-400 mt-1">Explore popular getaways</p>
-          </div>
-          <button
-            onClick={() => navigate('/search')}
-            className="hidden md:flex items-center gap-2 text-brand-400 hover:text-brand-300 font-medium transition-colors"
-          >
-            View All <ArrowRight className="w-4 h-4" />
-          </button>
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold">Popular Destinations in India</h2>
+          <p className="text-surface-400 mt-1">Explore top tourist spots across the country</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            { img: FEATURED_IMGS[0], title: 'Mountain Retreat', desc: 'Serene getaways in the hills' },
-            { img: FEATURED_IMGS[1], title: 'Beachfront Resorts', desc: 'Relax by the ocean' },
-            { img: FEATURED_IMGS[2], title: 'Urban Stays', desc: 'Explore city life in style' },
-          ].map((item) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {destinations.map((dest) => (
             <div
-              key={item.title}
+              key={dest.city}
               className="group relative rounded-xl overflow-hidden cursor-pointer h-64"
-              onClick={() => navigate('/search')}
+              onClick={() => handleDestinationClick(dest.city)}
             >
               <img
-                src={item.img}
-                alt={item.title}
+                src={dest.img}
+                alt={dest.city}
+                loading="lazy"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-surface-900 via-surface-900/40 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-4">
-                <h3 className="text-lg font-semibold">{item.title}</h3>
-                <p className="text-sm text-surface-300">{item.desc}</p>
+                <h3 className="text-lg font-semibold">{dest.city}</h3>
+                <p className="text-sm text-surface-300">{dest.state}</p>
               </div>
             </div>
           ))}
